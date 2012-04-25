@@ -79,8 +79,8 @@ For this tutorial I am using Rails 3.2.3 and Ruby 1.9.3p125 (2012-02-16 revision
 
 11) Add a graph to the view of your new static page [mygraph.html.erb](https://github.com/diasks2/amcharts_example/blob/master/app/views/static_pages/mygraph.html.erb)
 
-    <h1>StaticPages#mygraph</h1>
-    <p>Find me in app/views/static_pages/mygraph.html.erb</p>
+    <h1>My amCharts Graph</h1>
+    <p>This is my amCharts graph</p>
 
     <div id="chartdiv" style="width: 100%; height: 400px;"></div>
 
