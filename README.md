@@ -1,6 +1,6 @@
 #amCharts tutorial for Ruby on Rails - pulling data from your database to populate your graph
 - - -
-[amCharts](http://www.amcharts.com/) is a set of JavaScript/HTML5 charts that includes serial (column, bar, line, area, step line, smoothed line, candlestick and ohlc graphs), pie/donut, radar/polar and xy/scatter/bubble charts.  In this tutorial, I will go over how to pull the data from a database to populate your graph or chart.
+[amCharts](http://www.amcharts.com/) is a set of JavaScript/HTML5 charts.  In this tutorial, I will go over how to pull the data from a database to populate your graph or chart.
 
 A big thanks to [@chiragsinghal](https://twitter.com/chiragsinghal) for helping me get this working. However, any mistakes in this tutorial our purely my own.
 
@@ -8,7 +8,7 @@ For this tutorial I am using Rails 3.2.3 and Ruby 1.9.3p125 (2012-02-16 revision
 
 #amCharts Tutorial
 - - -
-###Section 1 - Creating a new project and setting up the models
+###Section 1 - Creating a new project
 
 1) Create a new repository on [GitHub](https://github.com) named 'amcharts_example'
 
@@ -50,7 +50,11 @@ For this tutorial I am using Rails 3.2.3 and Ruby 1.9.3p125 (2012-02-16 revision
      gem 'pg', '0.12.2'
     end
 
-5) Initialize the Git repository and push to GitHub
+5) Install and include the new gems
+
+    $ bundle install
+
+6) Initialize the Git repository and push to GitHub
 
     $ git init
     $ git add .
@@ -58,8 +62,18 @@ For this tutorial I am using Rails 3.2.3 and Ruby 1.9.3p125 (2012-02-16 revision
     $ git remote add origin git@github.com:<username>/amcharts_example.git
     $ git push -u origin master
 
-6) (Optional) Deploy the app to Heroku. (Assuming you have already created a Heroku account. If not, check out this [tutorial](http://ruby.railstutorial.org/chapters/beginning?version=3.2#sec:1.4.1)) 
+7) (Optional) Deploy the app to Heroku. (Assuming you have already created a Heroku account. If not, check out this [tutorial](http://ruby.railstutorial.org/chapters/beginning?version=3.2#sec:1.4.1)) 
 
     $ heroku create --stack cedar
     $ git push heroku master
+
+###Section 2 - Creating a static page to display our graph
+
+8) Generate a StaticPages controller
+
+$ rails generate controller StaticPages mygraph
+
+9) Download the latest version of the [amCharts JavaScript Charts](http://www.amcharts.com/download) release from their website
+
+10) From the download, copy the file 'amcharts.js' and paste it in your project file directory in the app/assets/javascripts folder.
 
