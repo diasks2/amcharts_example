@@ -71,7 +71,7 @@ For this tutorial I am using Rails 3.2.3 and Ruby 1.9.3p125 (2012-02-16 revision
 
 8) Generate a StaticPages controller
 
-$ rails generate controller StaticPages mygraph
+    $ rails generate controller StaticPages mygraph
 
 9) Download the latest version of the [amCharts JavaScript Charts](http://www.amcharts.com/download) release from their website
 
@@ -190,5 +190,5 @@ And visit: [http://localhost:3000/static_pages/mygraph](http://localhost:3000/st
 
 Now navigate to http://[yourappname].herokuapp.com/static_pages/mygraph
 
-You can visit the example for this tutorial here: [http://amcharts-example.herokuapp.com/static_pages/mygraph](http://surveyor-example.herokuapp.com/static_pages/mygraph)
+You can visit the example for this tutorial here: [http://amcharts-example.herokuapp.com/static_pages/mygraph](http://amcharts-example.herokuapp.com/static_pages/mygraph)
 
