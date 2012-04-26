@@ -154,10 +154,6 @@ For this tutorial I am using Rails 3.2.3 and Ruby 1.9.3p125 (2012-02-16 revision
                 categoryAxis.labelRotation = 90;
                 categoryAxis.gridPosition = "start";
 
-                // value
-                // in case you don"t want to change default settings of value axis,
-                // you don"t need to create it, as one value axis is created automatically.
-
                 // GRAPH
                 var graph = new AmCharts.AmGraph();
                 graph.valueField = "visits";
@@ -237,5 +233,65 @@ We will add a 'Country' model (and the corresponding 'Countries' controller).  H
           redirect_to '/countries/new'
         end
      end
-   end    
+   end
+
+20) Update the countries/new.html.erb view
+
+    <h1>New Country</h1>
+    <p>Enter some new data</p>
+
+    <%= form_for(@countries) do |f| %>
+
+    <%= f.label :country %>
+    <%= f.text_field :country %>
+
+    <%= f.label :visits %>
+    <%= f.text_field :visits %>
+
+    <%= f.submit "Save" %>
+
+    <% end %>       
+
+*Note that we have not added any validations to our model (and we also do not have any validations on the client side, just a text field). When you create your own model, you will want to make sure that you our vaildating the data that is going into your model.
+
+21) Make our graph dynamic (pulling the data from our database).  Update 'var chartData' in the [static_pages/mygraph view](https://github.com/diasks2/amcharts_example/blob/master/app/views/static_pages/mygraph.html.erb) 
+
+    var chartData = <%= raw @countries.to_json.gsub(/\"created_at\"/, "created_at").gsub(/\"id\"/, "id").gsub(/\"country\"/, "country").gsub(/\"visits\"/, "visits").gsub(/\"updated_at\"/, "updated_at") %>;
+
+22) Update the [StaticPages controller](https://github.com/diasks2/amcharts_example/blob/master/app/controllers/static_pages_controller.rb)
+
+    class StaticPagesController < ApplicationController
+      def mygraph
+        @countries = Country.find(:all)
+      end
+    end
+
+23) Commit our changes and test on the local server
+
+    $ git add .
+    $ git commit -am "completed dynamic graph"
+    $ git push
+    $ rails s
+
+And visit: [http://localhost:3000/countries/new](http://localhost:3000/countries/new) and enter in some data: 
+
+Example; Country: Japan Visits: 300
+
+You should now see a bar graph with one bar! Your graph is now dynamic and tied to your model.
+
+24) Push to Heroku and test
+
+    $ git push heroku
+    $ heroku run rake db:migrate
+    $ heroku open
+
+Now navigate to http://[yourappname].herokuapp.com/countries/new
+
+You can visit the example for this tutorial here: [http://amcharts-example.herokuapp.com/countries/new](http://amcharts-example.herokuapp.com/countries/new)
+
+
+
+
+
+
 
