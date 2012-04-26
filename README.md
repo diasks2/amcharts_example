@@ -8,7 +8,7 @@ For this tutorial I am using Rails 3.2.3 and Ruby 1.9.3p125 (2012-02-16 revision
 
 #amCharts Tutorial
 - - -
-###Section 1 - Creating a new project
+###Section 1 - Create a new project
 
 1) Create a new repository on [GitHub](https://github.com) named 'amcharts_example'
 
@@ -67,7 +67,7 @@ For this tutorial I am using Rails 3.2.3 and Ruby 1.9.3p125 (2012-02-16 revision
     $ heroku create --stack cedar
     $ git push heroku master
 
-###Section 2 - Creating a static page to display the graph
+###Section 2 - Create a static page to display the graph
 
 8) Generate a StaticPages controller
 
@@ -188,9 +188,9 @@ Now navigate to http://[yourappname].herokuapp.com/static_pages/mygraph
 
 You can visit the example for this tutorial here: [http://amcharts-example.herokuapp.com/static_pages/mygraph](http://amcharts-example.herokuapp.com/static_pages/mygraph)
 
-###Section 3 - Adding a model
+###Section 3 - Add a model
 
-We will add a 'Country' model (and the corresponding 'Countries' controller).  Int his database we will store the data for each country and the number of visits.
+We will add a 'Country' model (and the corresponding 'Countries' controller).  In this database we will store the data for each country and the number of visits.
 
 15) Add a 'Countries' controller
 
@@ -252,14 +252,13 @@ We will add a 'Country' model (and the corresponding 'Countries' controller).  I
 
     <% end %>       
 
-*Note that we have not added any validations to our model (and we also do not have any validations on the client side, just a text field). When you create your own model, you will want to make sure that you our vaildating the data that is going into your model.
+*NB: We have not added any validations to our model (and we also do not have any validations on the client side, just a text field). When you create your own model, you will want to make sure that you are vaildating the data that is going into your model.
 
 21) Make the graph dynamic (pulling the data from the database).  Update 'var chartData' in the [static_pages/mygraph view](https://github.com/diasks2/amcharts_example/blob/master/app/views/static_pages/mygraph.html.erb) 
 
     var chartData = <%= raw @countries.to_json.gsub(/\"created_at\"/, "created_at").gsub(/\"id\"/, "id").gsub(/\"country\"/, "country").gsub(/\"visits\"/, "visits").gsub(/\"updated_at\"/, "updated_at") %>;
 
-On first glance, it might seem like amCharts supports JSON data. However, it is actually not valid JSON and we need to adjust the JSON data accordingly.     
-
+*NB: On first glance, it might seem like amCharts supports JSON data. However, it is actually not valid JSON and we need to adjust the JSON data accordingly.     
 22) Update the [StaticPages controller](https://github.com/diasks2/amcharts_example/blob/master/app/controllers/static_pages_controller.rb)
 
     class StaticPagesController < ApplicationController
@@ -289,4 +288,4 @@ You should now see a bar graph with one bar! Your graph is now dynamic and tied 
 
 Now navigate to http://[yourappname].herokuapp.com/countries/new
 
-You can visit the example for this tutorial here: [http://amcharts-example.herokuapp.com/countries/new](http://amcharts-example.herokuapp.com/countries/new)and enter in some data.
+You can visit the example for this tutorial here: [http://amcharts-example.herokuapp.com/countries/new](http://amcharts-example.herokuapp.com/countries/new) and enter in some data.
