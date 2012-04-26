@@ -258,7 +258,8 @@ We will add a 'Country' model (and the corresponding 'Countries' controller).  I
 
     var chartData = <%= raw @countries.to_json.gsub(/\"created_at\"/, "created_at").gsub(/\"id\"/, "id").gsub(/\"country\"/, "country").gsub(/\"visits\"/, "visits").gsub(/\"updated_at\"/, "updated_at") %>;
 
-*NB: On first glance, it might seem like amCharts supports JSON data. However, it is actually not valid JSON and we need to adjust the JSON data accordingly.     
+*NB: On first glance, it might seem like amCharts supports JSON data. However, it is actually not valid JSON and we need to adjust the JSON data accordingly.
+
 22) Update the [StaticPages controller](https://github.com/diasks2/amcharts_example/blob/master/app/controllers/static_pages_controller.rb)
 
     class StaticPagesController < ApplicationController
