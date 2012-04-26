@@ -1,5 +1,8 @@
 AmchartsExample::Application.routes.draw do
-  get "static_pages/mygraph"
+  resources :countries, only: [:new, :create]
+
+   match '/countries/new', to: 'countries#new'
+   match '/static_pages/mygraph',   to: 'static_pages#mygraph'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

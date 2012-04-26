@@ -192,3 +192,50 @@ Now navigate to http://[yourappname].herokuapp.com/static_pages/mygraph
 
 You can visit the example for this tutorial here: [http://amcharts-example.herokuapp.com/static_pages/mygraph](http://amcharts-example.herokuapp.com/static_pages/mygraph)
 
+###Section 3 - Adding a model
+
+We will add a 'Country' model (and the corresponding 'Countries' controller).  Here we will store the data for each country and the number of visits.
+
+15) Add a 'Countries' controller
+
+    $ rails generate controller Countries new
+
+16) Add a 'Country' model
+
+    $ rails generate model Country country:string visits:integer
+
+(Note that, in contrast to the plural convention for controller names, model names are singular.)
+
+17) Migrate up the database
+
+    $ bundle exec rake db:migrate
+
+18) Update the [routes.rb](https://github.com/diasks2/amcharts_example/blob/master/config/routes.rb) file
+
+    resources :countries, only: [:new, :create]
+
+    match '/countries/new', to: 'countries#new'
+    match '/static_pages/mygraph',   to: 'static_pages#mygraph'
+
+19) Update the countries controller
+
+    class CountriesController < ApplicationController
+      def new
+        @countries = Country.new
+ 
+         respond_to do |format|
+          format.html  # new.html.erb
+          format.json  { render :json => @countries }
+         end
+      end
+
+     def create
+        @countries = Country.new(params[:country])
+        if @countries.save
+          redirect_to '/static_pages/mygraph'
+        else
+          redirect_to '/countries/new'
+        end
+     end
+   end    
+
