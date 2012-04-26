@@ -1,8 +1,8 @@
-#amCharts tutorial for Ruby on Rails - pulling data from your database to populate your graph
+#Ruby on Rails Tutorial - How to create an amCharts graph that pulls data from a database to populate the graph
 - - -
-[amCharts](http://www.amcharts.com/) is a set of JavaScript/HTML5 charts.  In this tutorial, I will go over how to pull the data from a database to populate your graph or chart.
+[amCharts](http://www.amcharts.com/) is a set of JavaScript/HTML5 charts.  This tutorial covers how to pull data from a database to populate a graph or chart.
 
-A big thanks to [@chiragsinghal](https://twitter.com/chiragsinghal) for helping me get this working. However, any mistakes in this tutorial our purely my own.
+A big thanks to [@chiragsinghal](https://twitter.com/chiragsinghal) for helping me get this working. Any mistakes in this tutorial our purely my own.
 
 For this tutorial I am using Rails 3.2.3 and Ruby 1.9.3p125 (2012-02-16 revision 34643) [x86_64-darwin10.8.0].
 
@@ -17,7 +17,7 @@ For this tutorial I am using Rails 3.2.3 and Ruby 1.9.3p125 (2012-02-16 revision
     $ rails new amcharts_example
     $ cd amcharts_example
 
-3) Open the project in your favorite text editor (example: I am using Sublime Text 2)
+3) Open the project in your favorite text editor (Example: I am using Sublime Text 2)
 
     $ subl .
 
@@ -67,7 +67,7 @@ For this tutorial I am using Rails 3.2.3 and Ruby 1.9.3p125 (2012-02-16 revision
     $ heroku create --stack cedar
     $ git push heroku master
 
-###Section 2 - Creating a static page to display our graph
+###Section 2 - Creating a static page to display the graph
 
 8) Generate a StaticPages controller
 
@@ -75,9 +75,9 @@ For this tutorial I am using Rails 3.2.3 and Ruby 1.9.3p125 (2012-02-16 revision
 
 9) Download the latest version of the [amCharts JavaScript Charts](http://www.amcharts.com/download) release from their website
 
-10) From the download, copy the file 'amcharts.js' and paste it in your project file directory in the [app/assets/javascripts](https://github.com/diasks2/amcharts_example/tree/master/app/assets/javascripts) folder.
+10) From the download, copy the file 'amcharts.js' and paste it in the project file directory in the [app/assets/javascripts](https://github.com/diasks2/amcharts_example/tree/master/app/assets/javascripts) folder.
 
-11) Add a graph to the view of your new static page [mygraph.html.erb](https://github.com/diasks2/amcharts_example/blob/master/app/views/static_pages/mygraph.html.erb)
+11) Add a graph to the view of the new static page [mygraph.html.erb](https://github.com/diasks2/amcharts_example/blob/master/app/views/static_pages/mygraph.html.erb)
 
     <h1>My amCharts Graph</h1>
     <p>This is my amCharts graph</p>
@@ -190,7 +190,7 @@ You can visit the example for this tutorial here: [http://amcharts-example.herok
 
 ###Section 3 - Adding a model
 
-We will add a 'Country' model (and the corresponding 'Countries' controller).  Here we will store the data for each country and the number of visits.
+We will add a 'Country' model (and the corresponding 'Countries' controller).  Int his database we will store the data for each country and the number of visits.
 
 15) Add a 'Countries' controller
 
@@ -213,7 +213,7 @@ We will add a 'Country' model (and the corresponding 'Countries' controller).  H
     match '/countries/new', to: 'countries#new'
     match '/static_pages/mygraph',   to: 'static_pages#mygraph'
 
-19) Update the countries controller
+19) Update the [countries controller](https://github.com/diasks2/amcharts_example/blob/master/app/controllers/countries_controller.rb)
 
     class CountriesController < ApplicationController
       def new
@@ -225,17 +225,17 @@ We will add a 'Country' model (and the corresponding 'Countries' controller).  H
          end
       end
 
-     def create
+      def create
         @countries = Country.new(params[:country])
         if @countries.save
           redirect_to '/static_pages/mygraph'
         else
           redirect_to '/countries/new'
         end
-     end
-   end
+      end
+    end
 
-20) Update the countries/new.html.erb view
+20) Update the [countries/new.html.erb](https://github.com/diasks2/amcharts_example/blob/master/app/views/countries/new.html.erb) view
 
     <h1>New Country</h1>
     <p>Enter some new data</p>
@@ -254,9 +254,11 @@ We will add a 'Country' model (and the corresponding 'Countries' controller).  H
 
 *Note that we have not added any validations to our model (and we also do not have any validations on the client side, just a text field). When you create your own model, you will want to make sure that you our vaildating the data that is going into your model.
 
-21) Make our graph dynamic (pulling the data from our database).  Update 'var chartData' in the [static_pages/mygraph view](https://github.com/diasks2/amcharts_example/blob/master/app/views/static_pages/mygraph.html.erb) 
+21) Make the graph dynamic (pulling the data from the database).  Update 'var chartData' in the [static_pages/mygraph view](https://github.com/diasks2/amcharts_example/blob/master/app/views/static_pages/mygraph.html.erb) 
 
     var chartData = <%= raw @countries.to_json.gsub(/\"created_at\"/, "created_at").gsub(/\"id\"/, "id").gsub(/\"country\"/, "country").gsub(/\"visits\"/, "visits").gsub(/\"updated_at\"/, "updated_at") %>;
+
+On first glance, it might seem like amCharts supports JSON data. However, it is actually not valid JSON and we need to adjust the JSON data accordingly.     
 
 22) Update the [StaticPages controller](https://github.com/diasks2/amcharts_example/blob/master/app/controllers/static_pages_controller.rb)
 
@@ -266,7 +268,7 @@ We will add a 'Country' model (and the corresponding 'Countries' controller).  H
       end
     end
 
-23) Commit our changes and test on the local server
+23) Commit the changes and test on the local server
 
     $ git add .
     $ git commit -am "completed dynamic graph"
@@ -288,11 +290,3 @@ You should now see a bar graph with one bar! Your graph is now dynamic and tied 
 Now navigate to http://[yourappname].herokuapp.com/countries/new
 
 You can visit the example for this tutorial here: [http://amcharts-example.herokuapp.com/countries/new](http://amcharts-example.herokuapp.com/countries/new)and enter in some data.
-
-
-
-
-
-
-
-
