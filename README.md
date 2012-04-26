@@ -2,7 +2,7 @@
 - - -
 [amCharts](http://www.amcharts.com/) is a set of JavaScript/HTML5 charts.  This tutorial covers how to pull data from a database to populate a graph or chart.
 
-A big thanks to [@chiragsinghal](https://twitter.com/chiragsinghal) for helping me get this working. Any mistakes in this tutorial our purely my own.
+A big thanks to [@chiragsinghal](https://twitter.com/chiragsinghal) for helping me get this working. Any mistakes in this tutorial are purely my own.
 
 For this tutorial I am using Rails 3.2.3 and Ruby 1.9.3p125 (2012-02-16 revision 34643) [x86_64-darwin10.8.0].
 
