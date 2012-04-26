@@ -287,7 +287,8 @@ You should now see a bar graph with one bar! Your graph is now dynamic and tied 
 
 Now navigate to http://[yourappname].herokuapp.com/countries/new
 
-You can visit the example for this tutorial here: [http://amcharts-example.herokuapp.com/countries/new](http://amcharts-example.herokuapp.com/countries/new)
+You can visit the example for this tutorial here: [http://amcharts-example.herokuapp.com/countries/new](http://amcharts-example.herokuapp.com/countries/new)and enter in some data.
+
 
 
 
