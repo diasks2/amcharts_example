@@ -260,6 +260,20 @@ We will add a 'Country' model (and the corresponding 'Countries' controller).  I
 
 *NB: On first glance, it might seem like amCharts supports JSON data. However, it is actually not valid JSON and we need to adjust the JSON data accordingly.
 
+21a) To refactor the above, we can pull the logic out of the view and create a helper method.  Thanks to [@chiragsinghal](https://twitter.com/chiragsinghal) for pointing this out.  This will also help keep your code DRY if you have multiple graphs.
+
+Open [static_pages_helper.rb](https://github.com/diasks2/amcharts_example/blob/master/app/helpers/static_pages_helper.rb) and edit the code as follows:
+
+    module StaticPagesHelper
+      def convert_to_amcharts_json(data_array)
+        data_array.to_json.gsub(/\"text\"/, "text").html_safe
+      end
+    end
+
+Then you can change the 'var chartData' to the following:
+     
+    var chartData = <%= convert_to_amcharts_json(@countries) %>;    
+
 22) Update the [StaticPages controller](https://github.com/diasks2/amcharts_example/blob/master/app/controllers/static_pages_controller.rb)
 
     class StaticPagesController < ApplicationController

@@ -6,7 +6,7 @@
  <script type="text/javascript">
             var chart;
 
-            var chartData = <%= raw @countries.to_json.gsub(/\"created_at\"/, "created_at").gsub(/\"id\"/, "id").gsub(/\"country\"/, "country").gsub(/\"visits\"/, "visits").gsub(/\"updated_at\"/, "updated_at") %>;
+            var chartData = <%= convert_to_amcharts_json(@countries) %>;
 
 
             AmCharts.ready(function () {
